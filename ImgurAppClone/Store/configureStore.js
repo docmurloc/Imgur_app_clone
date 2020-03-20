@@ -1,4 +1,12 @@
 import { createStore } from 'redux';
-import toggleFavorite from './Reducers/favoriteReducer'
+import profileReducer from './Reducers/profileReducer'
 
-export default createStore(toggleFavorite)
+const initialState = { 
+    access_token: null,
+    refresh_token: null,
+    expires_in: null,
+    account_username: null,
+    account_id: null
+};
+
+export default createStore(profileReducer, initialState)

@@ -4,12 +4,19 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from "../Components/HomeScreen";
 import Profile from "../Components/ProfileScreen";
+import ConnectionScreen from '../Components/ConnectionScreen'
+
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+            name="Connection"
+            component={ConnectionScreen}
+            options={{title: 'connection'}}
+        />
         <Stack.Screen
           name="Home"
           component={Home}
