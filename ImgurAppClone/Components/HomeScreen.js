@@ -12,8 +12,8 @@ function HomeScreen(props) {
     
     if (gallery.length < 1) {
         getGallery(props.access_token).then((answer) => {
-            //console.log("answer is :\n");
-            //console.log(answer.data[0]);
+            console.log("answer is :\n");
+            console.log(answer.data[0]);
             setGallery(answer.data);
         })
     }
