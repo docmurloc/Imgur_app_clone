@@ -6,7 +6,7 @@ import getGallery from '../API/getGallery'
 import Gallery from './Gallery';
 
 function HomeScreen(props) {
-    console.log(props);
+    //console.log(props);
 
     const [gallery, setGallery] = useState(null);
 
@@ -22,8 +22,8 @@ function HomeScreen(props) {
     
     if (!gallery) {
         getGallery(props.profil.access_token).then((answer) => {
-            console.log("answer is :\n");
-            console.log(answer.data[0]);
+            //console.log("answer is :\n");
+            //console.log(answer.data[0]);
             setGallery(answer.data);
         })
     }

@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Image , View, ActivityIndicator, Dimensions, StyleSheet} from "react-native";
 
+import Video from 'react-native-video'
+
 const styles = StyleSheet.create({
     viewImage: {
         alignSelf: 'center',
@@ -14,10 +16,8 @@ const styles = StyleSheet.create({
 })
 
 function DisplayImage(props) {
-    //console.log("\n\nDisplay image:\n")
-    //console.log(props.data)
-
-
+    console.log("\n\nDisplay image:\n")
+    console.log(props.data)
 
     if (!props.data) {
         return (
@@ -26,6 +26,20 @@ function DisplayImage(props) {
     }
 
     let type = props.data.type
+
+    if (type == 'video/mp4') {
+        return (
+            <View style={styles.viewImage}>
+                <Video
+                    source={{uri: props.data.link}}
+                    style={{
+                        height :100,
+                        width: 100
+                    }}
+                />
+            </View>
+        )
+    }
     if (type != 'image/jpeg') {
         return (
             <View style={styles.viewImage}>
