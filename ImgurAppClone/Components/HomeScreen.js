@@ -2,12 +2,16 @@ import React from "react";
 import { Button , View} from "react-native";
 import {connect} from 'react-redux';
 
+import getGallery from '../API/getGallery'
 
+function HomeScreen(props) {
+    console.log(props);
 
-function HomeScreen(prop) {
-    console.log(prop);
+    getGallery(props.access_token).then((answer) => {
+        console.log("answer is :\n");
+        console.log(answer.data[0]);
+    })
 
-    //console.log(prop.navigation);
     return (
         <View>
             <Button
