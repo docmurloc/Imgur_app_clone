@@ -1,12 +1,10 @@
-import { createStore } from 'redux';
+import { createStore , combineReducers} from 'redux';
 import profileReducer from './Reducers/profileReducer'
+import galleryReducer from './Reducers/galleryReducer'
 
-const initialState = { 
-    access_token: null,
-    refresh_token: null,
-    expires_in: null,
-    account_username: null,
-    account_id: null
-};
+const rootReducer = combineReducers({
+    profil: profileReducer,
+    gallery: galleryReducer
+})
 
-export default createStore(profileReducer, initialState)
+export default createStore(rootReducer)

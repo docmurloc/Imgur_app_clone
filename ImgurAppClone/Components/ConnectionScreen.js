@@ -10,9 +10,9 @@ import { CommonActions } from '@react-navigation/native';
 
 function ConnectionScreen(prop) {
     console.log("ConnectionScreen log:");
-    console.log(prop);
+    console.log(prop.profil);
 
-    if (prop.access_token) {
+    if (prop.profil && prop.profil.access_token) {
         prop.navigation.dispatch(
             CommonActions.reset({
                 index:1,
