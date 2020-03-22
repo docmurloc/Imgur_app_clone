@@ -1,16 +1,32 @@
 import React, {useState, useEffect} from "react";
-import { Button , View, FlatList, ActivityIndicator} from "react-native";
+import { Button , View, FlatList, StyleSheet} from "react-native";
 import {connect} from 'react-redux';
 
 import getGallery from '../API/getGallery'
 import Gallery from './Gallery';
 
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'red',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    detail: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+})
 
 const defaultPage = {
     section: '/hot',
     sort: '',
     pageRequest: 0,
-    //pageDisplay: 0,
+    pageDisplay: 0,
     window: '',
     showViral: null,
     mature: null,
@@ -26,6 +42,7 @@ function HomeScreen(props) {
         console.log(gallery.length)
         const action = {type: 'SET_GALLERY', value : gallery}
         props.dispatch(action)
+        DisplayMoreMedia()
 
     }, [gallery])
 
@@ -45,25 +62,67 @@ function HomeScreen(props) {
         })
     }, [page])
 
-    const endpage = () => {
+
+    const [pageDisplay, setPageDisplay] = useState({
+        nbDisplay: 0,
+        galleryDisplay: []
+    });
+
+    useEffect(() => {
+        console.log("\n\npageDisplay:\n\n")
+        console.log(pageDisplay.nbDisplay)
+    }, [pageDisplay])
+
+    const NextPage = () => {
         let newPage = {
             ...page,
             pageRequest : page.pageRequest + 1,
         }
         setPage(newPage);
     }
+
+    const DisplayMoreMedia = () => {
+        //console.log("more media call\n", gallery)
+        if (pageDisplay.nbDisplay < gallery.length) {
+            let newDisplay = {
+                ...pageDisplay,
+                nbDisplay: pageDisplay.nbDisplay + 10
+            }
+
+            for (var i = pageDisplay.nbDisplay; i < pageDisplay.nbDisplay + 10 && i < gallery.length; i++) {
+                newDisplay.galleryDisplay.push(gallery[i])
+            }
+            //console.log("new ", newDisplay);
+            setPageDisplay(newDisplay)
+        }
+    }
+
     return (
-        <View>
+        <View
+            style={styles.container}
+        >
             <Button
               title="Go to Jane's profile"
               onPress={() => props.navigation.navigate('Profile', {name: 'Jane'})}
             />
-            <FlatList
-                data={gallery}
-                renderItem={(item) => <Gallery data={item.item}/>}
-                keyExtractor={item => item.id}
-                onEndReached={endpage}
+            <View
+                style={{
+                    height: '85%'
+                }}
+            >
+                <FlatList
+                    data={pageDisplay.galleryDisplay}
+                    renderItem={(item) => <Gallery data={item.item}/>}
+                    keyExtractor={item => item.id}
+                    onResponderEnd={DisplayMoreMedia}
+                    onEndReachedThreshold={0}
+                />
+            </View>
+            <Button
+              title="Next Page"
+              onPress={NextPage}
             />
+
         </View>
     );
 }
