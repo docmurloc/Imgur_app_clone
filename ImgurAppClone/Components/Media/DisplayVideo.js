@@ -30,6 +30,12 @@ function DisplayVideo(props) {
                 controls={true}
                 paused={true}
                 repeat={true}
+                bufferConfig={{
+                    minBufferMs: 15000,
+                    maxBufferMs: 50000,
+                    bufferForPlaybackMs: 2500,
+                    bufferForPlaybackAfterRebufferMs: 5000
+                  }}
             />
         </View>
     )

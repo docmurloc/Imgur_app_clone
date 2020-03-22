@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
 })
 
 function DisplayImage(props) {
-    console.log("\n\nDisplay image:\n")
-    console.log(props.data)
+    //console.log("\n\nDisplay image:\n")
+    //console.log(props.data)
 
     if (!props.data) {
         return (
