@@ -4,7 +4,7 @@ import env from '../env/Environement'
 const defaultParam = {
     section: '/hot',
     sort: '',
-    page: '/0',
+    pageRequest: 0,
     window: '',
     showViral: null,
     mature: null,
@@ -12,7 +12,7 @@ const defaultParam = {
 }
 
 function getGallery(accessToken = null, paramObj = defaultParam) {
-    let url = 'https://api.imgur.com/3/gallery' + paramObj.section + ( accessToken ? paramObj.sort : '') + paramObj.window + paramObj.page;
+    let url = 'https://api.imgur.com/3/gallery' + paramObj.section + ( accessToken ? paramObj.sort : '') + paramObj.window + '/' +paramObj.pageRequest;
 
     if (paramObj.showViral || (paramObj.mature && accessToken ) || paramObj.album_previews) {
         url = url + '?';
