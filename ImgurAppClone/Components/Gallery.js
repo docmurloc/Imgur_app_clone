@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet ,Text , View} from "react-native";
 
 import getImage from '../API/getImage';
-import DisplayImage from './Image'
+import DisplayMedia from './Media/DisplayMedia'
 
 const styles = StyleSheet.create({
     container: {
@@ -51,7 +51,7 @@ function Gallery(props) {
         <View style={styles.container}>
             <Text style={styles.title} >{props.data.title}</Text>
             <Text>by {props.data.account_url}</Text>
-            <DisplayImage data={cover}/>
+            <DisplayMedia data={cover}/>
             <View style={styles.detail}>
                 <Text>{props.data.views} views</Text>
                 <Text>{props.data.points} points</Text>
