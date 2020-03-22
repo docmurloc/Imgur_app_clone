@@ -7,7 +7,7 @@ import Gallery from './Gallery';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between'
@@ -34,6 +34,8 @@ const defaultPage = {
 }
 
 function HomeScreen(props) {
+
+    console.log("refresh\n")
 
     const [gallery, setGallery] = useState([]);
 
@@ -81,9 +83,10 @@ function HomeScreen(props) {
         setPage(newPage);
     }
 
+    var loading = false;
     const DisplayMoreMedia = () => {
-        //console.log("more media call\n", gallery)
-        if (pageDisplay.nbDisplay < gallery.length) {
+        //console.log("more media call\n", gallery) 
+        if (pageDisplay.nbDisplay < gallery.length && !loading) {
             let newDisplay = {
                 ...pageDisplay,
                 nbDisplay: pageDisplay.nbDisplay + 10
@@ -92,6 +95,7 @@ function HomeScreen(props) {
             for (var i = pageDisplay.nbDisplay; i < pageDisplay.nbDisplay + 10 && i < gallery.length; i++) {
                 newDisplay.galleryDisplay.push(gallery[i])
             }
+            loading = true;
             //console.log("new ", newDisplay);
             setPageDisplay(newDisplay)
         }
@@ -115,7 +119,6 @@ function HomeScreen(props) {
                     renderItem={(item) => <Gallery data={item.item}/>}
                     keyExtractor={item => item.id}
                     onResponderEnd={DisplayMoreMedia}
-                    onEndReachedThreshold={0}
                 />
             </View>
             <Button
